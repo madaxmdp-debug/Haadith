@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#183d34">
+<title>Al-Hadith — Bibliothèque de la Sunna</title>
+<style>
+:root{--forest:#183d34;--forest2:#245647;--gold:#c9a76a;--ink:#1e2925;--muted:#6e7973;--paper:#f4f2eb;--card:#fffefa;--line:#e4e0d5;--soft:#eaf0e9;--shadow:0 14px 40px #1c352b0d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.hero{background:radial-gradient(ellipse at 90% 10%,#396b56 0,transparent 38%),linear-gradient(130deg,#14372f,#1e4a3d);color:#fff;padding:34px max(20px,calc((100% - 1180px)/2)) 30px;position:relative;overflow:hidden}
+.hero:after{content:"۞";position:absolute;right:5%;top:-60px;font:260px Georgia;color:#ffffff0b;pointer-events:none}
+.brand{display:flex;align-items:center;gap:12px;position:relative;z-index:1}.seal{width:44px;height:44px;border:1px solid #c9a76a88;border-radius:50%;display:grid;place-items:center;color:var(--gold);font:26px Georgia}
+.kicker{font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:#d8c69e;font-weight:800}
+h1{font:500 clamp(2.2rem,5vw,3.6rem)/1.05 Georgia,serif;margin:14px 0 10px;letter-spacing:-.03em}
+.hero p{max-width:720px;color:#e0e9e3;margin:0;position:relative;z-index:1}
+.hero-bottom{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;position:relative;z-index:1}
+.hero-chip{border:1px solid #ffffff30;border-radius:999px;padding:7px 12px;color:#edf2ee;font-size:.82rem}
+.shell{max-width:1180px;margin:0 auto;padding:22px 18px 60px}
+.topstats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:15px 17px;box-shadow:var(--shadow)}
+.stat strong{display:block;font:500 1.8rem Georgia,serif;color:var(--forest)}.stat span{font-size:.78rem;color:var(--muted)}
+.nav{display:flex;gap:8px;overflow-x:auto;padding:4px 0 13px;margin-bottom:4px;scrollbar-width:thin}
+.nav button{white-space:nowrap;border:1px solid var(--line);border-radius:12px;background:#fffdf8;color:#45534c;padding:10px 14px;font-weight:700}
+.nav button.active{background:var(--forest);border-color:var(--forest);color:white;box-shadow:0 5px 14px #183d3422}
+.view{display:none}.view.active{display:block}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:10px 0 16px}
+h2{font:500 clamp(1.5rem,3vw,2rem) Georgia,serif;margin:0;color:var(--forest)}
+.sub{color:var(--muted);margin:5px 0 0;font-size:.9rem}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
+.search-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+label{display:block;font-size:.76rem;color:var(--muted);font-weight:800;margin:0 0 6px}
+input,select,textarea{width:100%;padding:12px 13px;border:1px solid #dcd8cc;border-radius:11px;background:#fff;color:var(--ink);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--forest2);box-shadow:0 0 0 3px #24564717}
+.tools{display:flex;gap:9px;align-items:end;flex-wrap:wrap;margin-top:12px}
+.tools>div{flex:1;min-width:180px}
+.btn{border:1px solid var(--line);border-radius:11px;background:#fffdf8;padding:10px 14px;color:var(--ink);font-weight:750}
+.btn.primary{background:var(--forest);color:#fff;border-color:var(--forest)}
+.btn.gold{background:#f3ead8;border-color:#ead9b7;color:#755c2e}
+.btn.icon{padding:8px 10px;min-width:42px}
+.resultline{margin-left:auto;color:var(--muted);font-size:.82rem;padding:8px 0}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hadith{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;display:flex;flex-direction:column;gap:11px;box-shadow:var(--shadow);min-width:0}
+.hadith-top{display:flex;justify-content:space-between;gap:8px;align-items:start}
+.badges{display:flex;gap:6px;flex-wrap:wrap}.pill{font-size:.7rem;font-weight:800;border-radius:99px;padding:5px 9px;background:var(--soft);color:#315447}.pill.gold{background:#f5ead7;color:#775b2c}
+.hadith h3{font:600 1.28rem/1.2 Georgia,serif;color:var(--forest);margin:0}
+.hadith .translation{font-size:1rem;line-height:1.65;margin:0}
+.arabic{font:1.55rem/2 Georgia,serif;text-align:right;direction:rtl;border-block:1px solid var(--line);padding:9px 0;color:#2b4037}
+.hmeta{font-size:.8rem;color:var(--muted);line-height:1.6}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:5px}
+.card-actions button{font-size:.78rem}
+.smallnote{background:#f5f2e9;border-radius:10px;padding:10px 12px;color:#6e634f;font-size:.78rem}
+.empty{padding:42px 20px;text-align:center;color:var(--muted);background:var(--card);border:1px dashed #d7d2c5;border-radius:16px}
+.category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.category-tile{border:1px solid var(--line);background:var(--card);border-radius:15px;padding:18px;text-align:left;box-shadow:var(--shadow);color:var(--ink)}
+.category-tile:hover{border-color:var(--gold);transform:translateY(-1px)}
+.category-tile b{display:block;color:var(--forest);font:1.15rem Georgia,serif}.category-tile span{font-size:.8rem;color:var(--muted)}
+.daily{background:linear-gradient(135deg,#183d34,#2c604c);color:white;border-radius:22px;padding:clamp(22px,5vw,44px);position:relative;overflow:hidden}
+.daily:after{content:"۞";position:absolute;right:18px;bottom:-75px;font:220px Georgia;color:#ffffff0b}
+.daily .label{color:#d8c69e;letter-spacing:.17em;text-transform:uppercase;font-weight:800;font-size:.72rem}
+.daily h2{color:white;font-size:clamp(1.7rem,4vw,2.4rem);margin:10px 0}
+.daily blockquote{font:1.25rem/1.65 Georgia,serif;margin:14px 0;max-width:760px;position:relative;z-index:1}
+.daily .meta{color:#d5e1d8;font-size:.85rem}
+.daily .btn{position:relative;z-index:1;margin-top:16px}
+.progress-wrap{background:#e9e5d9;height:10px;border-radius:99px;overflow:hidden;margin:12px 0}.progress{height:100%;background:var(--gold);width:0;transition:width .25s}
+.plan-list{display:grid;gap:9px}.plan-item{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);padding:13px;border-radius:12px}.plan-item input{width:18px;height:18px;accent-color:var(--forest)}.plan-item span{flex:1}
+.note-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.note-card{border:1px solid var(--line);border-radius:14px;padding:15px;background:#fff}
+.note-card h3{font:1.1rem Georgia,serif;color:var(--forest);margin:0 0 8px}
+footer{color:var(--muted);font-size:.82rem;padding:20px 4px}
+dialog{border:1px solid var(--line);border-radius:18px;max-width:640px;width:calc(100% - 28px);padding:0;background:var(--card);color:var(--ink);box-shadow:0 25px 90px #0003}
+dialog::backdrop{background:#13251dcc;backdrop-filter:blur(3px)}.modal-head{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}.modal-body{padding:20px}.modal-body textarea{min-height:130px;resize:vertical}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#172f28;color:white;padding:11px 16px;border-radius:999px;box-shadow:0 10px 30px #0002;z-index:20;font-size:.85rem}
+@media(max-width:760px){.search-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.category-grid{grid-template-columns:repeat(2,1fr)}.topstats{gap:8px}.stat{padding:12px}.stat strong{font-size:1.45rem}.panel{padding:15px}.note-grid{grid-template-columns:1fr}.hero{padding-top:25px}}
+@media(max-width:430px){.category-grid{grid-template-columns:1fr}.topstats{grid-template-columns:1fr 1fr}.topstats .stat:last-child{grid-column:span 2}}
+</style></head>
+<body>
+<header class="hero">
+ <div class="brand"><div class="seal">۞</div><div><div class="kicker">Bibliothèque de la Sunna</div><div style="font:1rem Georgia,serif">Al-Hadith</div></div></div>
+ <h1>Lire. Chercher.<br>Approfondir.</h1>
+ <p>Une bibliothèque personnelle pour explorer des hadiths de Sahih al-Bukhari et Sahih Muslim, retrouver un thème et garder une trace de ses lectures.</p>
+ <div class="hero-bottom"><span class="hero-chip">Sahih al-Bukhari</span><span class="hero-chip">Sahih Muslim</span><span class="hero-chip">Recherche locale & privée</span></div>
+</header>
+<main class="shell">
+ <div class="topstats">
+  <div class="stat"><strong id="statTotal">34</strong><span>entrées dans la bibliothèque</span></div>
+  <div class="stat"><strong id="statFav">0</strong><span>favoris enregistrés</span></div>
+  <div class="stat"><strong id="statRead">0</strong><span>lectures marquées</span></div>
+ </div>
+ <nav class="nav" aria-label="Navigation principale">
+  <button class="active" data-view="search">⌕ Recherche</button><button data-view="daily">✦ Hadith du jour</button><button data-view="quiz">❖ Quiz</button><button data-view="themes">▦ Thèmes</button><button data-view="favorites">♡ Favoris</button><button data-view="journal">✎ Carnet</button><button data-view="plan">✓ Parcours</button><button data-view="data">⚙ Données</button>
+ </nav>
+ <section class="view active" id="view-search">
+  <div class="section-head"><div><h2>Recherche dans le recueil</h2><p class="sub">Cherchez dans le texte, le rapporteur, la référence ou le thème.</p></div></div>
+  <div class="panel">
+   <div class="search-grid">
+    <div><label for="q">MOT-CLÉ OU EXPRESSION</label><input id="q" placeholder="Ex. patience, voisin, intention…"></div>
+    <div><label for="book">RECUEIL</label><select id="book"><option value="">Les deux recueils</option><option value="Bukhari">Sahih al-Bukhari</option><option value="Muslim">Sahih Muslim</option></select></div>
+    <div><label for="category">CATÉGORIE</label><select id="category"><option value="">Toutes les catégories</option></select></div>
+   </div>
+   <div class="tools">
+    <div><label for="narrator">RAPPORTEUR / COMPAGNON</label><select id="narrator"><option value="">Tous les rapporteurs</option></select></div>
+    <div><label for="sort">ORDRE</label><select id="sort"><option value="source">Par recueil et référence</option><option value="category">Par catégorie</option><option value="az">Titre A → Z</option></select></div>
+    <button class="btn" id="reset">Effacer les filtres</button><span class="resultline" id="count" aria-live="polite"></span>
+   </div>
+  </div>
+  <div class="cards" id="cards"></div><div id="empty" class="empty" hidden>Aucun résultat. Essayez un autre mot ou retirez un filtre.</div>
+ </section>
+ <section class="view" id="view-daily">
+  <div class="section-head"><div><h2>Un rappel à méditer</h2><p class="sub">Une entrée de la bibliothèque, renouvelée chaque jour localement.</p></div></div>
+  <div class="daily" id="dailyCard"></div>
+  <div class="panel" style="margin-top:16px"><b>À retenir</b><p id="dailyLesson" class="sub"></p><b>À mettre en pratique</b><p id="dailyAction" class="sub"></p><button class="btn primary" id="dailyJournal">Écrire une réflexion</button></div>
+ </section>
+ <section class="view" id="view-quiz">
+  <div class="section-head"><div><h2>Quiz des hadiths</h2><p class="sub">Teste ta mémoire à partir des entrées présentes dans ta bibliothèque.</p></div></div>
+  <div class="panel"><div class="tools"><div><label for="quizLength">NOMBRE DE QUESTIONS</label><select id="quizLength"><option value="5">5 questions</option><option value="10">10 questions</option><option value="15">15 questions</option></select></div><button class="btn primary" id="quizStart">Commencer un quiz</button></div></div>
+  <div id="quizArea" class="panel"><p class="sub">Lance un quiz pour commencer.</p></div>
+</section>
+<section class="view" id="view-themes">
+  <div class="section-head"><div><h2>Explorer par thème</h2><p class="sub">Sélectionnez une catégorie pour afficher les entrées associées.</p></div></div>
+  <div class="category-grid" id="categoryTiles"></div>
+ </section>
+ <section class="view" id="view-favorites">
+  <div class="section-head"><div><h2>Mes favoris</h2><p class="sub">Vos marque-pages sont conservés sur cet appareil.</p></div></div>
+  <div class="cards" id="favoriteCards"></div><div id="favoriteEmpty" class="empty">Vous n’avez pas encore ajouté de favori. Utilisez le bouton ♡ sur une fiche.</div>
+ </section>
+ <section class="view" id="view-journal">
+  <div class="section-head"><div><h2>Mon carnet de lecture</h2><p class="sub">Gardez vos réflexions, questions et notes personnelles par hadith.</p></div></div>
+  <div class="panel"><label for="journalPick">CHOISIR UN HADITH</label><select id="journalPick"></select><label for="journalText" style="margin-top:12px">MA RÉFLEXION</label><textarea id="journalText" placeholder="Ce que je retiens, une question à approfondir, une action à mettre en pratique…"></textarea><div class="tools"><button class="btn primary" id="saveNote">Enregistrer la note</button><span class="resultline" id="noteStatus"></span></div></div>
+  <div class="note-grid" id="notesList"></div><div id="notesEmpty" class="empty">Votre carnet est vide pour le moment.</div>
+ </section>
+ <section class="view" id="view-plan">
+  <div class="section-head"><div><h2>Parcours de lecture</h2><p class="sub">Un parcours simple en 7 étapes. Cochez les lectures terminées.</p></div></div>
+  <div class="panel"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><b>Mon avancée</b><strong id="planCount">0 / 7</strong></div><div class="progress-wrap"><div class="progress" id="planProgress"></div></div><div class="plan-list" id="planList"></div><div class="tools"><button class="btn" id="resetPlan">Réinitialiser le parcours</button></div></div>
+ </section>
+ <section class="view" id="view-data">
+  <div class="section-head"><div><h2>Bibliothèque & données</h2><p class="sub">Importez un corpus JSON, exportez vos notes ou restaurez les exemples intégrés.</p></div></div>
+  <div class="panel">
+   <h3 style="font:1.25rem Georgia,serif;color:var(--forest);margin-top:0">Importer un corpus JSON</h3>
+   <p class="sub">Le fichier est traité dans votre navigateur. Les entrées importées doivent indiquer le recueil, la référence et le texte.</p>
+   <input type="file" id="file" accept=".json,application/json">
+   <div class="tools"><button class="btn" id="exportCorpus">Exporter la bibliothèque</button><button class="btn" id="exportNotes">Exporter mon carnet</button><button class="btn" id="restore">Restaurer les exemples</button></div>
+  </div>
+  <div class="panel">
+   <h3 style="font:1.25rem Georgia,serif;color:var(--forest);margin-top:0">À propos des références</h3>
+   <div class="smallnote">Les 34 entrées fournies sont des résumés ou paraphrases françaises d’exemples couramment référencés. Elles ne constituent pas une traduction intégrale ou une édition critique. Les numéros peuvent varier selon les éditions. « Rapporteur » désigne le compagnon associé à la narration, pas un authentificateur moderne. Vérifiez le texte arabe, la chaîne et la numérotation dans une édition reconnue avant toute citation ou diffusion.</div>
+  </div>
+ </section>
+ <footer>Al-Hadith · Application autonome en HTML. Les favoris, notes et progrès restent dans le stockage local de ce navigateur. Aucun compte ni serveur n’est nécessaire.</footer>
+</main>
+<dialog id="detailDialog"><div class="modal-head"><div><div class="kicker" style="color:#94713c">FICHE DE LECTURE</div><h2 id="detailTitle" style="font-size:1.5rem;margin-top:4px"></h2></div><button class="btn icon" id="closeDetail" aria-label="Fermer">✕</button></div><div class="modal-body" id="detailBody"></div></dialog>
+<div id="toast" class="toast" hidden></div>
+<script>
+const starter=[
+{ id:"b1",book:"Bukhari",number:"1",narrator:"Umar ibn al-Khattab",category:"Intentions",title:"Les actes et les intentions",text:"Les actes sont jugés selon les intentions, et chacun reçoit selon ce qu’il a eu l’intention d’accomplir.",arabic:"إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ",note:"Paraphrase française. Référence couramment citée : Sahih al-Bukhari 1."},
+{ id:"m1907",book:"Muslim",number:"1907",narrator:"Umar ibn al-Khattab",category:"Intentions",title:"La valeur de l’intention",text:"Les actes dépendent des intentions ; chacun sera rétribué selon son intention.",arabic:"إِنَّمَا الأَعْمَالُ بِالنِّيَّةِ",note:"Paraphrase française. Vérifier le libellé dans l’édition choisie."},
+{ id:"b13",book:"Bukhari",number:"13",narrator:"Anas ibn Malik",category:"Foi & fraternité",title:"Aimer pour son frère",text:"La foi n’est complète pour l’un de vous que lorsqu’il aime pour son frère ce qu’il aime pour lui-même.",note:"Paraphrase française."},
+{ id:"m45",book:"Muslim",number:"45",narrator:"Anas ibn Malik",category:"Foi & fraternité",title:"La fraternité dans la foi",text:"Nul ne croit pleinement tant qu’il n’aime pas pour son frère ce qu’il aime pour lui-même.",note:"Paraphrase française."},
+{ id:"b6018",book:"Bukhari",number:"6018",narrator:"Abu Hurayra",category:"Parole & comportement",title:"Dire du bien ou se taire",text:"Que celui qui croit en Allah et au Jour dernier dise du bien ou garde le silence.",note:"Paraphrase française."},
+{ id:"m47",book:"Muslim",number:"47",narrator:"Abu Hurayra",category:"Parole & comportement",title:"Le voisin et l’hôte",text:"Que celui qui croit en Allah et au Jour dernier honore son voisin et son hôte, et dise du bien ou se taise.",note:"Paraphrase française."},
+{ id:"b39",book:"Bukhari",number:"39",narrator:"Abu Hurayra",category:"Facilité & miséricorde",title:"La religion est aisée",text:"La religion est aisée ; celui qui la rend excessivement difficile risque d’être dépassé.",note:"Paraphrase française."},
+{ id:"b6464",book:"Bukhari",number:"6464",narrator:"Aisha",category:"Adoration",title:"La constance dans les œuvres",text:"Les œuvres les plus aimées d’Allah sont celles qui sont régulières, même si elles sont peu nombreuses.",note:"Paraphrase française."},
+{ id:"m782",book:"Muslim",number:"782",narrator:"Aisha",category:"Adoration",title:"Les œuvres régulières",text:"Les œuvres les plus aimées sont celles accomplies avec constance, même modestes.",note:"Paraphrase française."},
+{ id:"b6011",book:"Bukhari",number:"6011",narrator:"Abdullah ibn Amr",category:"Compassion",title:"Faire preuve de miséricorde",text:"Le miséricordieux reçoit la miséricorde du Tout-Miséricordieux. Faites preuve de miséricorde envers ceux qui sont sur terre.",note:"Paraphrase française."},
+{ id:"m2699",book:"Muslim",number:"2699",narrator:"Abu Hurayra",category:"Savoir & entraide",title:"Chercher le savoir",text:"Celui qui emprunte un chemin à la recherche du savoir, Allah lui facilite un chemin vers le Paradis.",note:"Paraphrase française."},
+{ id:"b52",book:"Bukhari",number:"52",narrator:"An-Nu'man ibn Bashir",category:"Cœur & conduite",title:"Le cœur",text:"Il existe dans le corps un morceau de chair : s’il est sain, tout le corps est sain ; s’il est corrompu, tout le corps l’est. C’est le cœur.",note:"Paraphrase française."},
+{ id:"m1599",book:"Muslim",number:"1599",narrator:"An-Nu'man ibn Bashir",category:"Cœur & conduite",title:"Le licite et l’équivoque",text:"Le licite est clair et l’illicite est clair ; entre les deux se trouvent des choses équivoques.",note:"Paraphrase française."},
+{ id:"b6116",book:"Bukhari",number:"6116",narrator:"Abu Hurayra",category:"Maîtrise de soi",title:"La force véritable",text:"Le fort n’est pas celui qui terrasse les autres, mais celui qui se maîtrise lorsqu’il est en colère.",note:"Paraphrase française."},
+{ id:"m2609",book:"Muslim",number:"2609",narrator:"Abu Hurayra",category:"Maîtrise de soi",title:"Se maîtriser dans la colère",text:"La force véritable consiste à se maîtriser dans la colère.",note:"Paraphrase française."},
+{ id:"b5673",book:"Bukhari",number:"5673",narrator:"Abu Hurayra",category:"Vie & patience",title:"Santé et temps libre",text:"Deux bienfaits dont beaucoup de gens ne tirent pas pleinement profit sont la santé et le temps libre.",note:"Paraphrase française. Vérifier la référence et le libellé selon l’édition."},
+{ id:"m2564",book:"Muslim",number:"2564",narrator:"Abu Hurayra",category:"Fraternité",title:"Ne pas se détourner les uns des autres",text:"Ne vous enviez pas, ne vous détestez pas, ne vous détournez pas les uns des autres ; soyez frères.",note:"Paraphrase française."},
+{ id:"b2442",book:"Bukhari",number:"2442",narrator:"Abdullah ibn Umar",category:"Justice & entraide",title:"Ne pas faire injustice",text:"Le musulman est le frère du musulman : il ne lui fait pas injustice et ne l’abandonne pas.",note:"Paraphrase française."},
+{ id:"m2580",book:"Muslim",number:"2580",narrator:"Abu Hurayra",category:"Justice & entraide",title:"Soulager une difficulté",text:"Celui qui soulage un croyant d’une difficulté de ce monde, Allah le soulagera d’une difficulté au Jour de la Résurrection.",note:"Paraphrase française."},
+{ id:"b6465",book:"Bukhari",number:"6465",narrator:"Aisha",category:"Équilibre",title:"Agir selon ses capacités",text:"Accomplissez les œuvres avec mesure et selon vos capacités ; les œuvres les plus aimées sont régulières.",note:"Paraphrase française."},
+{ id:"m223",book:"Muslim",number:"223",narrator:"Abu Malik al-Ash'ari",category:"Purification",title:"La purification",text:"La purification est une partie essentielle de la foi.",note:"Paraphrase française."},
+{ id:"b10",book:"Bukhari",number:"10",narrator:"Abdullah ibn Amr",category:"Parole & comportement",title:"Protéger les autres",text:"Le musulman est celui dont les autres musulmans sont à l’abri de la langue et de la main.",note:"Paraphrase française."},
+{ id:"m40",book:"Muslim",number:"40",narrator:"Tamim ad-Dari",category:"Conseil",title:"Le conseil sincère",text:"La religion est le conseil sincère.",note:"Paraphrase française."},
+{ id:"b6412",book:"Bukhari",number:"6412",narrator:"Abdullah ibn Umar",category:"Vie & rappel",title:"Comme un voyageur",text:"Vis dans ce monde comme un étranger ou un voyageur.",note:"Paraphrase française."},
+/* 10 entrées supplémentaires */
+{ id:"new1",book:"Bukhari",number:"6013",narrator:"Abu Hurayra",category:"Voisinage",title:"Bien traiter son voisin",text:"L’ange Jibril a continué à recommander le bon traitement du voisin, au point que le Prophète a pensé qu’il pourrait recevoir une part d’héritage.",note:"Paraphrase française ; référence couramment citée autour de Sahih al-Bukhari 6014 selon les éditions."},
+{ id:"new2",book:"Muslim",number:"2699",narrator:"Abu Hurayra",category:"Savoir & entraide",title:"Faciliter le chemin vers le bien",text:"Celui qui aide son frère dans le besoin reçoit l’aide d’Allah ; celui qui suit un chemin pour rechercher le savoir voit son chemin vers le Paradis facilité.",note:"Paraphrase de passages rapportés dans Sahih Muslim ; vérifier la subdivision exacte."},
+{ id:"new3",book:"Bukhari",number:"6114",narrator:"Abu Hurayra",category:"Maîtrise de soi",title:"Ne pas céder à la colère",text:"Un homme demanda un conseil. Le Prophète lui répondit à plusieurs reprises : « Ne te mets pas en colère. »",note:"Paraphrase française ; numérotation courante Sahih al-Bukhari 6116, selon les éditions."},
+{ id:"new4",book:"Muslim",number:"55",narrator:"Abu Ruqayya Tamim ibn Aws ad-Dari",category:"Conseil",title:"La sincérité du conseil",text:"Le Prophète a enseigné que la religion repose sur le conseil sincère envers Allah, Son Livre, Son Messager, les responsables et les musulmans.",note:"Paraphrase française ; référence courante Sahih Muslim 55."},
+{ id:"new5",book:"Bukhari",number:"6033",narrator:"Abdullah ibn Amr",category:"Caractère",title:"Les meilleurs comportements",text:"Parmi les meilleurs croyants figurent ceux dont le comportement est le meilleur.",note:"Paraphrase française ; référence à vérifier selon l’édition."},
+{ id:"new6",book:"Muslim",number:"1009",narrator:"Abu Dharr",category:"Bienfaisance",title:"Une bonne action accessible",text:"Ne méprise aucune bonne action, même le fait d’accueillir ton frère avec un visage souriant.",note:"Paraphrase française ; référence courante Sahih Muslim 2626, selon les éditions."},
+{ id:"new7",book:"Bukhari",number:"6021",narrator:"Abu Hurayra",category:"Compassion",title:"La compassion envers les autres",text:"Celui qui ne fait pas miséricorde aux autres ne recevra pas miséricorde.",note:"Paraphrase française ; référence courante Sahih al-Bukhari 6013, selon les éditions."},
+{ id:"new8",book:"Muslim",number:"2586",narrator:"Abu Hurayra",category:"Fraternité",title:"Soutenir son frère",text:"Le croyant est un soutien pour son frère : il ne l’opprime pas et ne le livre pas à l’injustice.",note:"Paraphrase française ; vérifier le numéro exact dans l’édition."},
+{ id:"new9",book:"Bukhari",number:"6024",narrator:"Abu Hurayra",category:"Parole & comportement",title:"La parole douce",text:"Une parole bonne est une aumône.",note:"Paraphrase française ; référence courante Sahih al-Bukhari 2989 ou 6023 selon les éditions."},
+{ id:"new10",book:"Muslim",number:"2699",narrator:"Abu Hurayra",category:"Entraide",title:"Allah aide celui qui aide",text:"Allah vient en aide au serviteur tant que celui-ci vient en aide à son frère.",note:"Paraphrase française ; passage couramment référencé dans Sahih Muslim 2699."}
+];
+
+/* Ajouts complémentaires : résumés français, avec lien de vérification par référence */
+starter.push(
+{id:"b3-extra",book:"Bukhari",number:"3",narrator:"Aisha",category:"Révélation",title:"Le commencement de la révélation",text:"Le début de la révélation est rapporté à travers le récit de la retraite du Prophète dans la grotte de Hira et la première révélation.",note:"Résumé du récit introductif. Consulter la narration complète dans la source.",url:"https://sunnah.com/bukhari:3"},
+{id:"b8-extra",book:"Bukhari",number:"8",narrator:"Abdullah ibn Umar",category:"Foi & pratiques",title:"Les piliers de l’islam",text:"L’islam est décrit à travers cinq piliers : l’attestation de foi, la prière, la zakat, le pèlerinage et le jeûne du Ramadan.",note:"Résumé/paraphrase ; vérifier le libellé exact.",url:"https://sunnah.com/bukhari:8"},
+{id:"b15-extra",book:"Bukhari",number:"15",narrator:"Anas ibn Malik",category:"Foi & fraternité",title:"Aimer le Messager",text:"La foi est liée à l’amour du Messager, au-delà de l’attachement à toute autre personne.",note:"Résumé prudent du sens général ; vérifier le texte exact et les variantes.",url:"https://sunnah.com/bukhari:15"},
+{id:"b601-extra",book:"Bukhari",number:"601",narrator:"Abu Hurayra",category:"Adoration",title:"La prière en assemblée",text:"La prière accomplie en groupe est décrite comme supérieure à la prière individuelle par une récompense multipliée.",note:"Résumé ; vérifier la formulation et la référence dans l’édition.",url:"https://sunnah.com/bukhari:601"},
+{id:"b646-extra",book:"Bukhari",number:"646",narrator:"Abu Hurayra",category:"Adoration",title:"La récompense de la prière en groupe",text:"Un récit rapporte la valeur particulière de la prière accomplie avec la communauté.",note:"Résumé thématique ; consulter le texte complet et sa référence.",url:"https://sunnah.com/bukhari:646"},
+{id:"m55-extra",book:"Muslim",number:"55",narrator:"Tamim ad-Dari",category:"Conseil",title:"Le conseil sincère",text:"Le conseil sincère est présenté comme un élément central de la religion, envers Allah, Son Livre, Son Messager et les musulmans.",note:"Paraphrase ; référence courante Sahih Muslim 55.",url:"https://sunnah.com/muslim:55"},
+{id:"m2626-extra",book:"Muslim",number:"2626",narrator:"Abu Dharr",category:"Bienfaisance",title:"Ne mépriser aucune bonne action",text:"Même une action simple, comme accueillir son frère avec un visage souriant, ne doit pas être tenue pour insignifiante.",note:"Paraphrase ; vérifier le libellé exact et la numérotation.",url:"https://sunnah.com/muslim:2626"},
+{id:"m2588-extra",book:"Muslim",number:"2588",narrator:"Abu Hurayra",category:"Compassion",title:"La charité ne diminue pas les biens",text:"Le hadith enseigne que l’aumône ne diminue pas les biens et associe le pardon à l’honneur.",note:"Résumé/paraphrase ; vérifier la référence exacte selon l’édition.",url:"https://sunnah.com/muslim:2588"},
+{id:"m2699b-extra",book:"Muslim",number:"2699",narrator:"Abu Hurayra",category:"Savoir & entraide",title:"Alléger les difficultés d’autrui",text:"Celui qui soulage un croyant d’une difficulté de ce monde reçoit une aide correspondante au Jour de la Résurrection.",note:"Paraphrase d’un passage rapporté dans Sahih Muslim ; vérifier la subdivision exacte.",url:"https://sunnah.com/muslim:2699"},
+{id:"m55b-extra",book:"Muslim",number:"55b",narrator:"Jarir ibn Abdullah",category:"Conseil",title:"L’engagement à conseiller sincèrement",text:"Un compagnon rapporte son engagement à établir la prière, donner la zakat et conseiller sincèrement les musulmans.",note:"Résumé du récit ; vérifier la subdivision et le texte exact.",url:"https://sunnah.com/muslim:56"}
+);
+
+const planIds=["b1","b13","b6018","b39","b6116","m223","m2580"];
+let data=[...starter],fav=new Set(),read=new Set(),notes={},done=new Set();
+const $=id=>document.getElementById(id);
+const norm=s=>(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function persist(){try{localStorage.setItem("alhadith_v2",JSON.stringify({fav:[...fav],read:[...read],notes,done:[...done]}))}catch(e){}}
+function load(){try{let x=JSON.parse(localStorage.getItem("alhadith_v2")||"{}");fav=new Set(x.fav||[]);read=new Set(x.read||[]);notes=x.notes||{};done=new Set(x.done||[])}catch(e){}}
+function categories(){return [...new Set(data.map(h=>h.category||"Non classé"))].sort((a,b)=>a.localeCompare(b,"fr"))}
+function fillFilters(){
+ let c=$("category"),old=c.value;c.innerHTML='<option value="">Toutes les catégories</option>'+categories().map(x=>`<option>${esc(x)}</option>`).join("");c.value=old;
+ let n=$("narrator"),oldn=n.value;n.innerHTML='<option value="">Tous les rapporteurs</option>'+[...new Set(data.map(h=>h.narrator||"Non indiqué"))].sort().map(x=>`<option>${esc(x)}</option>`).join("");n.value=oldn;
+ $("categoryTiles").innerHTML=categories().map(x=>`<button class="category-tile" data-cat="${esc(x)}"><b>${esc(x)}</b><span>${data.filter(h=>h.category===x).length} entrée(s) · ouvrir le thème →</span></button>`).join("");
+ $("categoryTiles").querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{$("category").value=b.dataset.cat;showView("search");render()});
+ $("journalPick").innerHTML=data.map(h=>`<option value="${esc(h.id)}">${esc(h.title)} — ${esc(h.book)} ${esc(h.number)}</option>`).join("");
+}
+function card(h){
+ let favOn=fav.has(h.id),readOn=read.has(h.id);
+ return `<article class="hadith"><div class="hadith-top"><div class="badges"><span class="pill">${h.book==="Bukhari"?"Sahih al-Bukhari":"Sahih Muslim"}</span><span class="pill gold">${esc(h.category||"Non classé")}</span></div><button class="btn icon" data-fav="${esc(h.id)}" aria-label="${favOn?"Retirer des favoris":"Ajouter aux favoris"}">${favOn?"♥":"♡"}</button></div><h3>${esc(h.title||"Hadith n° "+h.number)}</h3>${h.arabic?`<div class="arabic" lang="ar">${esc(h.arabic)}</div>`:""}<p class="translation">${esc(h.text)}</p><div class="hmeta">Rapporteur : <b>${esc(h.narrator||"Non indiqué")}</b><br>Référence : ${esc(h.book==="Bukhari"?"Sahih al-Bukhari":"Sahih Muslim")} ${esc(h.number||"—")}</div><div class="smallnote">${esc(h.note||"Paraphrase française — référence à vérifier selon l’édition.")}</div><div class="card-actions"><button class="btn" data-detail="${esc(h.id)}">Lire la fiche</button><button class="btn" data-read="${esc(h.id)}">${readOn?"✓ Lu":"Marquer comme lu"}</button><button class="btn" data-note="${esc(h.id)}">✎ Note</button></div></article>`;
+}
+function bindCards(root){
+ root.querySelectorAll("[data-fav]").forEach(b=>b.onclick=()=>{let id=b.dataset.fav;fav.has(id)?fav.delete(id):fav.add(id);persist();render();toast(fav.has(id)?"Ajouté aux favoris":"Retiré des favoris")});
+ root.querySelectorAll("[data-read]").forEach(b=>b.onclick=()=>{let id=b.dataset.read;read.has(id)?read.delete(id):read.add(id);persist();render();toast(read.has(id)?"Lecture marquée":"Marqueur retiré")});
+ root.querySelectorAll("[data-detail]").forEach(b=>b.onclick=()=>detail(b.dataset.detail));
+ root.querySelectorAll("[data-note]").forEach(b=>b.onclick=()=>{showView("journal");$("journalPick").value=b.dataset.note;$("journalText").value=notes[b.dataset.note]||"";$("noteStatus").textContent=""});
+}
+function getFiltered(){
+ let q=norm($("q").value.trim()),book=$("book").value,cat=$("category").value,nar=$("narrator").value,sort=$("sort").value;
+ let rows=data.filter(h=>(!q||norm([h.text,h.title,h.arabic,h.narrator,h.category,h.number,h.book].join(" ")).includes(q))&&(!book||h.book===book)&&(!cat||h.category===cat)&&(!nar||h.narrator===nar));
+ if(sort==="category")rows.sort((a,b)=>(a.category||"").localeCompare(b.category||""));
+ if(sort==="az")rows.sort((a,b)=>(a.title||"").localeCompare(b.title||""));
+ if(sort==="source")rows.sort((a,b)=>a.book.localeCompare(b.book)||Number(a.number)-Number(b.number));
+ return rows;
+}
+function render(){
+ let rows=getFiltered();$("cards").innerHTML=rows.map(card).join("");$("empty").hidden=rows.length>0;
+ $("count").textContent=`${rows.length} / ${data.length}`;
+ $("favoriteCards").innerHTML=data.filter(h=>fav.has(h.id)).map(card).join("");$("favoriteEmpty").hidden=fav.size>0;
+ bindCards($("cards"));bindCards($("favoriteCards"));
+ $("statTotal").textContent=data.length;$("statFav").textContent=fav.size;$("statRead").textContent=read.size;
+ renderNotes();renderPlan();renderDaily();
+}
+function showView(v){document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===v));document.querySelectorAll(".view").forEach(s=>s.classList.toggle("active",s.id==="view-"+v));if(v==="favorites")render();if(v==="journal")renderNotes()}
+function detail(id){let h=data.find(x=>x.id===id);if(!h)return;$("detailTitle").textContent=h.title||"Hadith n° "+h.number;$("detailBody").innerHTML=`<div class="badges"><span class="pill">${h.book==="Bukhari"?"Sahih al-Bukhari":"Sahih Muslim"}</span><span class="pill gold">${esc(h.category)}</span></div>${h.arabic?`<div class="arabic" lang="ar">${esc(h.arabic)}</div>`:""}<p style="font:1.2rem/1.7 Georgia,serif">${esc(h.text)}</p><p class="hmeta">Rapporteur : <b>${esc(h.narrator)}</b><br>Référence : ${esc(h.book==="Bukhari"?"Sahih al-Bukhari":"Sahih Muslim")} ${esc(h.number)}</p><div class="smallnote">${esc(h.note||"Paraphrase française. Vérifier dans une édition reconnue.")}</div><div class="tools"><button class="btn primary" id="detailFav">${fav.has(id)?"♥ Retirer des favoris":"♡ Ajouter aux favoris"}</button><button class="btn" id="detailNote">✎ Ouvrir le carnet</button></div>`;$("detailDialog").showModal();$("detailFav").onclick=()=>{fav.has(id)?fav.delete(id):fav.add(id);persist();render();detail(id)};$("detailNote").onclick=()=>{$("detailDialog").close();showView("journal");$("journalPick").value=id;$("journalText").value=notes[id]||""}}
+
+let quizItems=[],quizIndex=0,quizScore=0,quizAnswered=false;
+function renderDaily(){
+ let day=Math.floor(Date.now()/86400000),h=data[day%data.length];
+ $("dailyCard").innerHTML=`<div class="label">Hadith du jour · sélection locale</div><h2>${esc(h.title)}</h2><blockquote>${esc(h.text)}</blockquote><div class="meta">${esc(h.book==="Bukhari"?"Sahih al-Bukhari":"Sahih Muslim")} ${esc(h.number)} · Rapporteur : ${esc(h.narrator)}</div><button class="btn gold" id="dailyOpen">Ouvrir la fiche →</button>`;
+ $("dailyOpen").onclick=()=>detail(h.id);
+ $("dailyLesson").textContent=h.note||"Prends un instant pour réfléchir au sens de ce hadith et à son contexte dans le recueil.";
+ $("dailyAction").textContent="Choisis aujourd’hui une action concrète en lien avec le thème « "+(h.category||"ce rappel")+" », puis note ton expérience dans le carnet.";
+}
+function startQuiz(){
+ const pool=[...data]; if(pool.length<2){$("quizArea").innerHTML="<p>Ajoute au moins deux entrées pour lancer un quiz.</p>";return;}
+ quizItems=pool.sort(()=>Math.random()-.5).slice(0,Math.min(Number($("quizLength").value),pool.length));
+ quizIndex=0;quizScore=0;quizAnswered=false;showQuizQuestion();
+}
+function showQuizQuestion(){
+ if(quizIndex>=quizItems.length){$("quizArea").innerHTML=`<h3>Quiz terminé</h3><p>Ton score : <b>${quizScore} / ${quizItems.length}</b></p><button class="btn primary" id="quizAgain">Recommencer</button>`;$("quizAgain").onclick=startQuiz;return;}
+ const h=quizItems[quizIndex], distractors=data.filter(x=>x.id!==h.id).sort(()=>Math.random()-.5).slice(0,3);
+ const choices=[h,...distractors].sort(()=>Math.random()-.5);
+ const prompt="À quel rapporteur cette entrée est-elle attribuée ?";
+ $("quizArea").innerHTML=`<div class="badges"><span class="pill">Question ${quizIndex+1} / ${quizItems.length}</span><span class="pill gold">${esc(h.book==="Bukhari"?"Sahih al-Bukhari":"Sahih Muslim")}</span></div><h3>${esc(prompt)}</h3><blockquote>${esc(h.text)}</blockquote><div class="quizChoices">${choices.map((x,i)=>`<button class="btn quizChoice" data-choice="${i}">${esc(x.narrator||"Non indiqué")}</button>`).join("")}</div><p id="quizFeedback" class="sub" aria-live="polite"></p><button class="btn primary" id="quizNext" disabled>${quizIndex===quizItems.length-1?"Voir le résultat":"Question suivante"}</button>`;
+ $("quizArea").querySelectorAll("[data-choice]").forEach(b=>b.onclick=()=>{if(quizAnswered)return;quizAnswered=true;let correct=choices[Number(b.dataset.choice)].id===h.id;if(correct)quizScore++;$("quizFeedback").textContent=correct?"Bonne réponse.":"Réponse attendue : "+(h.narrator||"Non indiqué")+".";
+ $("quizArea").querySelectorAll("[data-choice]").forEach(x=>{x.disabled=true;if(choices[Number(x.dataset.choice)].id===h.id)x.classList.add("primary")});$("quizNext").disabled=false;});
+ $("quizNext").onclick=()=>{quizIndex++;quizAnswered=false;showQuizQuestion();};
+}
+$("quizStart").onclick=startQuiz;
+function renderNotes(){
+ let entries=Object.entries(notes).filter(([id,t])=>t&&t.trim());$("notesList").innerHTML=entries.map(([id,t])=>{let h=data.find(x=>x.id===id);return `<article class="note-card"><h3>${esc(h?h.title:"Hadith retiré du corpus")}</h3><p class="hmeta">${h?esc(h.book==="Bukhari"?"Sahih al-Bukhari":"Sahih Muslim")+" "+esc(h.number):""}</p><p>${esc(t)}</p><div class="tools"><button class="btn" data-editnote="${esc(id)}">Modifier</button><button class="btn" data-delnote="${esc(id)}">Supprimer</button></div></article>`}).join("");$("notesEmpty").hidden=entries.length>0;
+ $("notesList").querySelectorAll("[data-editnote]").forEach(b=>b.onclick=()=>{$("journalPick").value=b.dataset.editnote;$("journalText").value=notes[b.dataset.editnote]||"";window.scrollTo({top:0,behavior:"smooth"})});
+ $("notesList").querySelectorAll("[data-delnote]").forEach(b=>b.onclick=()=>{delete notes[b.dataset.delnote];persist();renderNotes();toast("Note supprimée")});
+}
+function renderPlan(){
+ let items=planIds.map((id,i)=>{let h=data.find(x=>x.id===id)||starter.find(x=>x.id===id);return {id,h}});let n=items.filter(x=>done.has(x.id)).length;$("planCount").textContent=`${n} / ${items.length}`;$("planProgress").style.width=(n/items.length*100)+"%";
+ $("planList").innerHTML=items.map(({id,h},i)=>`<label class="plan-item"><input type="checkbox" data-plan="${id}" ${done.has(id)?"checked":""}><span><b>Étape ${i+1}.</b> ${esc(h?.title||"Lecture")} <small style="display:block;color:var(--muted)">${esc(h?.category||"")}</small></span><button type="button" class="btn" data-planopen="${id}">Lire</button></label>`).join("");
+ $("planList").querySelectorAll("[data-plan]").forEach(c=>c.onchange=()=>{c.checked?done.add(c.dataset.plan):done.delete(c.dataset.plan);persist();renderPlan()});
+ $("planList").querySelectorAll("[data-planopen]").forEach(b=>b.onclick=e=>{e.preventDefault();detail(b.dataset.planopen)});
+}
+function toast(s){$("toast").textContent=s;$("toast").hidden=false;setTimeout(()=>{$("toast").hidden=true},1900)}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>showView(b.dataset.view));
+["q","book","category","narrator","sort"].forEach(id=>$(id).addEventListener(id==="q"?"input":"change",render));
+$("reset").onclick=()=>{$("q").value=$("book").value=$("category").value=$("narrator").value="";$("sort").value="source";render()};
+$("closeDetail").onclick=()=>$("detailDialog").close();
+$("saveNote").onclick=()=>{let id=$("journalPick").value,t=$("journalText").value.trim();if(!id){toast("Choisissez un hadith");return}if(t)notes[id]=t;else delete notes[id];persist();renderNotes();$("noteStatus").textContent="Enregistré";toast("Carnet mis à jour")};
+$("dailyJournal").onclick=()=>{let day=Math.floor(Date.now()/86400000),h=data[day%data.length];showView("journal");$("journalPick").value=h.id;$("journalText").value=notes[h.id]||""};
+$("resetPlan").onclick=()=>{if(confirm("Réinitialiser les 7 étapes du parcours ?")){done.clear();persist();renderPlan()}};
+function download(name,content,type="application/json"){let blob=new Blob([content],{type}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+$("exportCorpus").onclick=()=>download("al-hadith-bibliotheque.json",JSON.stringify(data,null,2));
+$("exportNotes").onclick=()=>download("al-hadith-carnet.json",JSON.stringify({notes,favoris:[...fav],lus:[...read],parcours:[...done]},null,2));
+$("restore").onclick=()=>{if(confirm("Restaurer les 34 exemples intégrés ? Les données importées seront remplacées.")){data=[...starter];fillFilters();render();toast("Exemples restaurés")}};
+$("file").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let parsed=JSON.parse(await f.text());if(!Array.isArray(parsed))throw Error("Le JSON doit être un tableau.");let clean=parsed.filter(x=>["Bukhari","Muslim"].includes(x.book)&&x.number&&x.text).map((x,i)=>({...x,id:String(x.id||"import-"+i),category:x.category||"Non classé",narrator:x.narrator||"Non indiqué",title:x.title||"Hadith n° "+x.number}));if(!clean.length)throw Error("Aucune entrée valide. Champs requis : book, number, text.");data=clean;fillFilters();render();showView("search");toast(`${data.length} entrées importées`)}catch(err){alert("Import impossible : "+err.message)}};
+load();fillFilters();render();
+</script></body></html>
